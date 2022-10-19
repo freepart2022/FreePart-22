@@ -12,17 +12,17 @@ We evluated the CVEs of popular data processing frameworks including and found t
 
 Details about the information in each phase are in [`Application List`](Application).
 
-[`CVE cases`](CVE cases) contains the POC image used by us to trigger the vulnerabilities of the underlying frameworks.
+[`CVE cases`](CVE%20cases) contains the POC image used by us to trigger the vulnerabilities of the underlying frameworks.
 
 ## List of TensorFlow APIs
 In section XXX, we mentioned that we could not put the whole list of categorized TensorFlow APIs due to the page limit.
 
-`TF API` contains the full list of TensorFlow API categorization.
+[`TF API`](TF%20API) contains the full list of TensorFlow API categorization.
 
 Details are shown in `TF API/phase.txt`.
 
 ## **FreePart Source Code**
-`code` folder contains the source code of FreePart. It includes the static analysis tools and the run-time support tools of FreePart.
+[`code`](code) folder contains the source code of FreePart. It includes the static analysis tools and the run-time support tools of FreePart.
 
 
 
