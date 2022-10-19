@@ -4,192 +4,457 @@
 
 We conduct a brief study of all the publicly available CVEs related to data processing frameworks that FreePart supports.
 
-| ID | CVE  | Vul. func./vari.  | Assoc. phases | Assoc. framework | Root cause|
-|--| -----| --------------- | ------------------------------------ | ------------- | ---------------- | 
-| 1  | [CVE-2019-5064](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-5064&scoretype=cvssv2)  | [CV\_FS\_MAX\_LEN](https://talosintelligence.com/vulnerability_reports/TALOS-2019-0853)| Phase 1 | OpenCV | Buffer Overflow |
-| 2  | [CVE-2019-5063](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-5063&scoretype=cvssv2)       | [CV\_FS\_MAX\_LEN](https://talosintelligence.com/vulnerability_reports/TALOS-2019-0852) | Phase 1       | OpenCV| Buffer Overflow |
-| 3  | [CVE-2019-14493](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-14493&scoretype=cvssv2)     | [cv::XMLParser::parse()](https://github.com/opencv/opencv/issues/15127)                    | Phase 1       | OpenCV           | null pointer deref             |
-| 4  | [CVE-2018-5269](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-5269&scoretype=cvssv2)       | [cv::RBaseStream::setPos()](https://github.com/opencv/opencv/issues/10540)                 | Phase 1       | OpenCV           | DoS (assertion failure)        |
-| 5  | [CVE-2018-5268](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-5268&scoretype=cvssv2)       | [cv::Jpeg2KDecoder::readComponent8u](https://github.com/opencv/opencv/blob/68d15fc62edad980f1ffa15ee478438335f39cc3/modules/imgcodecs/src/grfmt_jpeg2000.hpp)()                | Phase 1       | OpenCV           | Buffer Overflow                |
-| 6  | [CVE-2017-18009](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-18009&scoretype=cvssv2)     | [cv::HdrDecoder::checkSignature](https://github.com/opencv/opencv/blob/68d15fc62edad980f1ffa15ee478438335f39cc3/modules/imgcodecs/src/grfmt_hdr.cpp)()    | Phase 1       | OpenCV           | OOB read  |
-| 7 | [CVE-2017-17760](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-17760&scoretype=cvssv2)     | cv::PxMDecoder::readData() | Phase 1       | OpenCV           | Buffer Overflow                |
-| 8 | [CVE-2017-14136](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-14136&scoretype=cvssv2)     | FillColorRow1()             | Phase 1       | OpenCV           | OOB write |
-| 9 | [CVE-2017-12864](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12864&scoretype=cvssv2)     | ReadNumber()                | Phase 1       | OpenCV           | OOB write |
-| 10 | [CVE-2017-12863](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12863&scoretype=cvssv2)     | PxMDecoder::readData()      | Phase 1       | OpenCV           | OOB write |
-| 11 | [CVE-2017-12862](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12862&scoretype=cvssv2)     | AutoBuffer                  | Phase 1       | OpenCV           | Buffer Overflow                |
-| 12 | [CVE-2017-12606](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12606&scoretype=cvssv2)     | FillColorRow4()| Phase 1       | OpenCV           | OOB write |
-| 13 | [CVE-2017-12605](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12605&scoretype=cvssv2)     | FillColorRow8()| Phase 1       | OpenCV           | OOB write |
-| 14 | [CVE-2017-12604](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12604&scoretype=cvssv2)     | FillUniColor()| Phase 1       | OpenCV           | OOB write |
-| 15 | [CVE-2017-12603](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12603&scoretype=cvssv2)     | cv::RLByteStream::getBytes()| Phase 1       | OpenCV           | Buffer Overflow                |
-| 16 | [CVE-2017-12602](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12602&scoretype=cvssv2)     | PxMDecoder::readData()     | Phase 1       | OpenCV           | DoS (memory consumption)       |
-| 17 | [CVE-2017-12601](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12601&scoretype=cvssv2)     | cv::BmpDecoder::readData()  | Phase 1       | OpenCV           | Buffer Overflow                |
-| 18 | [CVE-2017-12600](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12600&scoretype=cvssv2)     | PxMDecoder::readData() | Phase 1       | OpenCV           | DoS (CPU consumption)          |
-| 19 | [CVE-2017-12599](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12599&scoretype=cvssv2)     | icvCvt\_BGRA2BGR\_8u\_C4C3R()| Phase 1       | OpenCV           | OOB read  |
-| 20 | [CVE-2017-12598](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12598&scoretype=cvssv2)     | cv::RBaseStream::readBlock()| Phase 1       | OpenCV           | OOB read  |
-| 21 | [CVE-2017-12597](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12597&scoretype=cvssv2)     | FillColorRow1()    | Phase 1       | OpenCV           | Buffer Overflow (OOB write)    |
-| 22 | [CVE-2017-1000450](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-1000450&scoretype=cvssv2) | FillUniColor() and FillUniGray()| Phase 1       | OpenCV           | Buffer Overflow (OOB write)    |
-| 23 | [CVE-2016-1516](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-1516&scoretype=cvssv2)       | [faces.size( )](https://arxiv.org/pdf/1701.04739.pdf) | Phase 1       | OpenCV           | DoS (segfault)                 |
-| 24 | [CVE-2016-1517](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-1517&scoretype=cvssv2)       | [faces.size( )](https://arxiv.org/pdf/1701.04739.pdf)  | Phase 1       | OpenCV           | DoS (segfault)                 |
-| 25 | [CVE-2019-19624](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-19624&scoretype=cvssv2)     | [calc()](https://github.com/opencv/opencv/issues/14554)| Phase 2       | OpenCV           | OOB read  |
-| 26 | [CVE-2019-15939](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-15939&scoretype=cvssv2)     | [cv::HOGDescriptor::getDescriptorSize](https://github.com/OpenCV/opencv/issues/15287)| Phase 2       | OpenCV           | divide-by-zero error           |
-| 27 | [CVE-2019-14492](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-14492&scoretype=cvssv2)     | [HaarEvaluator::OptFeature::calc()](https://github.com/opencv/opencv/issues/15124) | Phase 2       | OpenCV           | OOB read/write                 |
-| 28 | [CVE-2019-14491](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-14491&scoretype=cvssv2)     | [cv::predictOrdered<cv::HaarEvaluator>](https://github.com/opencv/opencv/issues/15125)  | Phase 2       | OpenCV           | OOB read  |
-| 29 | [CVE-2017-12852](https://vulmon.com/vulnerabilitydetails?qid=CVE-2017-12852&scoretype=cvssv2)     | pad()  | Phase 2       | Numpy            | DoS (infinite loop)            |
-| 30 | [CVE-2020-5313](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-5313&scoretype=cvssv2)       | [ImagingFliDecode()](https://github.com/python-pillow/Pillow/commit/a09acd0decd8a87ccce939d5ff65dab59e7d365b)  | Phase 1       | pillow           | Buffer Overflow (OOB write)    |
-| 31 | [CVE-2020-5312](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-5312&scoretype=cvssv2)       | [ImagingPcxDecode()](https://github.com/python-pillow/Pillow/commit/93b22b846e0269ee9594ff71a72bec02d2bea8fd)   | Phase 1       | pillow           | Buffer Overflow                |
-| 32 | [CVE-2020-5311](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-5311&scoretype=cvssv2)       | [expandrow()](https://github.com/python-pillow/Pillow/commit/a79b65c47c7dc6fe623aadf09aa6192fc54548f3)  | Phase 1       | pillow           | Buffer Overflow                |
-| 33 | [CVE-2020-5310](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-5310&scoretype=cvssv2)       | [ImagingLibTiffDecode()](https://github.com/python-pillow/Pillow/commit/4e2def2539ec13e53a82e06c4b3daf00454100c4)| Phase 1       | pillow           | Buffer Overflow (OOB write)    |
-| 34 | [CVE-2020-35655](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-35655&scoretype=cvssv2)     | [ImagingSgiRleDecode()](https://github.com/python-pillow/Pillow/commit/7e95c63fa7f503f185d3d9eb16b9cee1e54d1e46#)| Phase 1       | pillow           | Buffer Overflow (OOB read)     |
-| 35 | [CVE-2020-35654](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-35654&scoretype=cvssv2)     | [\_decodeStripYCbCr()](https://github.com/python-pillow/Pillow/commit/eb8c1206d6b170d4e798a00db7432e023853da5c#)| Phase 1       | pillow           | Buffer Overflow (OOB write)    |
-| 36 | [CVE-2020-35653](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-35653&scoretype=cvssv2)     | [ImagingPcxDecode()](https://github.com/python-pillow/Pillow/commit/6a83e4324738bb0452fbe8074a995b1c73f08de7#)| Phase 1       | pillow           | Buffer Overflow (OOB write)    |
-| 37 | [CVE-2020-11538](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-11538&scoretype=cvssv2)     | [expandrow()](https://github.com/python-pillow/Pillow/commit/4853e522bddbec66022c0915b9a56255d0188bf9#diff-f68b69c1a25b9eb9788c2c848cc6752353d150f1e4e1bd068f041f6860de4337)  | Phase 1       | pillow           | OOB read  |
-| 38 | [CVE-2020-10379](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-10379&scoretype=cvssv2)     | [ReadTile()](https://github.com/python-pillow/Pillow/commit/46f4a349b88915787fea3fb91348bb1665831bbb#diff-9478f2787e3ae9668a15123b165c23ac) | Phase 1       | pillow           | Buffer Overflow                |
-| 39 | [CVE-2020-10378](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-10378&scoretype=cvssv2)     | [ImagingPcxDecode()](https://github.com/python-pillow/Pillow/commit/6a83e4324738bb0452fbe8074a995b1c73f08de7#)| Phase 1       | pillow           | OOB read  |
-| 40 | [CVE-2020-10177](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-10177&scoretype=cvssv2)     | [ImagingFliDecode()](https://github.com/python-pillow/Pillow/pull/4503/commits/8d4f3c0c5f2fecf175aeb895e9c2d6d06d85bdc9)  | Phase 1       | pillow           | OOB read  |
-| 41 | [CVE-2019-19911](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-19911&scoretype=cvssv2)     | [\_open\_index()](https://github.com/python-pillow/Pillow/commit/138bd714f5cb2346af71447f7ec52ed54037bc0b#) | Phase 1       | pillow           | DoS (OOB write)                |
-| 42 | [CVE-2019-16865](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-16865&scoretype=cvssv2)     | [Image.getexif()](https://pillow.readthedocs.io/en/latest/releasenotes/6.2.0.html)    | Phase 1       | pillow           | DoS (OOB read)                 |
-| 43 | [CVE-2016-9190](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-9190&scoretype=cvssv2)       | [ImagingNew()](https://github.com/python-pillow/Pillow/pull/2146/commits/5d8a0be45aad78c5a22c8d099118ee26ef8144af) | Phase 1       | pillow           | symlink attacks                |
-| 44 | [CVE-2016-9189](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-9189&scoretype=cvssv2)       | [PyImaging\_MapBuffer()](https://github.com/python-pillow/Pillow/pull/2146/commits/c50ebe6459a131a1ea8ca531f10da616d3ceaa0f)| Phase 1       | pillow           | Buffer Overflow (OOB write)    |
-| 45 | [CVE-2016-3076](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-3076&scoretype=cvssv2)       | [j2k\_encode\_entry()](https://github.com/python-pillow/Pillow/blob/ee079ae67e7e24ec789d3cc7d180820a70d32fe6/src/libImaging/Jpeg2KEncode.c) | Phase 1       | pillow           | Buffer Overflow (DOS(memory corruption))            |
-| 46 | [CVE-2016-2533](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-2533&scoretype=cvssv2)       | [ImagingPcdDecode()](https://github.com/python-pillow/Pillow/commit/5bdf54b5a76b54fb00bd05f2d733e0a4173eefc9#diff-8ff6909c159597e22288ad818938fd6b)  | Phase 1       | pillow           | Buffer Overflow (DOS(crash))   |
-| 47 | [CVE-2016-0775](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-0775&scoretype=cvssv2)       | [ImagingFliDecode()](https://github.com/python-pillow/Pillow/commit/893a40850c2d5da41537958e40569c029a6e127b)   | Phase 1       | pillow           | Buffer Overflow (DOS(crash))   |
-| 48 | [CVE-2016-0740](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-0740&scoretype=cvssv2)       | [ImagingLibTiffDecode()](https://github.com/python-pillow/Pillow/commit/6dcbf5bd96b717c58d7b642949da8d323099928e)  | Phase 1       | pillow           | Buffer Overflow (OOB write)    |
-| 49 | [CVE-2014-9601](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-9601&scoretype=cvssv2)       | [chunk\_iCCP()](https://github.com/python-pillow/Pillow/pull/1060/commits/44286ba3c9bfa6ed565d11bd61460d8ec215e1ea) | Phase 1       | pillow           | DoS (crash)                    |
-| 50 | [CVE-2014-3598](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-3598&scoretype=cvssv2)       | [Jpeg2KImageFile()](https://github.com/python-pillow/Pillow/commit/d61921455e7e9d384dd93a783b459146c6a76d61#)  | Phase 1       | pillow           | DoS (crash)                    |
-| 51 | [CVE-2014-3589](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-3589&scoretype=cvssv2)       | [\_\_init\_\_()](https://github.com/python-pillow/Pillow/commit/205e056f8f9b06ed7b925cf8aa0874bc4aaf8a7d) | Phase 1       | pillow           | DoS (crash)                    |
-| 52 | [CVE-2014-3007](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-3007&scoretype=cvssv2)       | [load\_djpeg()](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737059) | Phase 1       | pillow           | Buffer Overflow (OOB write)    |
-| 53 | [CVE-2014-1933](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-1933&scoretype=cvssv2)       | [load\_djpeg() and Ghostscript()](https://github.com/python-pillow/Pillow/commit/4e9f367dfd3f04c8f5d23f7f759ec12782e10ee7)  | Phase 1       | pillow           | [Improper Link Resolution Before File Access (Symlink attacks)](https://capec.mitre.org/data/definitions/132.html) |
-| 54 | [CVE-2014-1932](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-1932&scoretype=cvssv2)       | [load\_djpe(), Ghostscript(), load() amd \_copy()](https://github.com/python-pillow/Pillow/commit/4e9f367dfd3f04c8f5d23f7f759ec12782e10ee7) | Phase 1       | pillow           | [Improper Link Resolution Before File Access (Symlink attacks)](https://capec.mitre.org/data/definitions/132.html) |
-| 55 | [CVE-2016-4009](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-4009&scoretype=cvssv2)       | [ImagingResampleHorizontal()](https://github.com/python-pillow/Pillow/commit/4e0d9b0b9740d258ade40cce248c93777362ac1e)  | Phase 2       | pillow           | Buffer Overflow (OOB write)    |
-| 56 | [CVE-2020-26271](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-26271&scoretype=cvssv2)     | [GraphConstructor::MakeEdge()](https://github.com/tensorflow/tensorflow/commit/0cc38aaa4064fd9e79101994ce9872c6d91f816b)| Phase 1       | TensorFlow       | OOB read  |
-| 57 | [CVE-2019-9635](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-9635&scoretype=cvssv2)       | [color\_map](https://github.com/tensorflow/tensorflow/commit/e41cb124cd0b325821af85cdacd9d8a12e206418) | Phase 1       | TensorFlow       | null pointer deref             |
-| 58 | [CVE-2018-21233](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-21233&scoretype=cvssv2)     | [DecodeBmp](https://github.com/tensorflow/tensorflow/commit/49f73c55d56edffebde4bca4a407ad69c1cae433) | Phase 1       | TensorFlow       | OOB read  |
-| 59 | [CVE-2018-7575](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-7575&scoretype=cvssv2)       | [kBlockTrailerSize](https://github.com/tensorflow/tensorflow/commit/d107fee1e4a9a4462f01564798d345802acc2aef)   | Phase 1       | TensorFlow       | OOB read  |
-| 60 | [CVE-2018-7576](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-7576&scoretype=cvssv2)       | [GifErrorString()](https://github.com/tensorflow/tensorflow/commit/c48431588e7cf8aff61d4c299231e3e925144df8)  | Phase 1       | TensorFlow       | null pointer deref             |
-| 61 | CVE-2020-5215 | [tf.float16](https://github.com/tensorflow/tensorflow/commit/5ac1b9e24ff6afc465756edf845d2e9660bd34bf) | Phase 2       | TensorFlow       | DoS (seg fault)                |
-| 62 | [CVE-2020-26270](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-26270&scoretype=cvssv2)     | [CHECK\_GT()](https://github.com/tensorflow/tensorflow/commit/14755416e364f17fb1870882fa778c7fec7f16e3)| Phase 2       | TensorFlow       | OOB read  |
-| 63 | [CVE-2020-26269](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-26269&scoretype=cvssv2)     | [GetMatchingPaths()](https://github.com/tensorflow/tensorflow/commit/8b5b9dc96666a3a5d27fad7179ff215e3b74b67c)| Phase 2       | TensorFlow       | OOB read  |
-| 64 | [CVE-2020-26268](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-26268&scoretype=cvssv2)     | [tf.raw\_ops.ImmutableConst()](https://github.com/tensorflow/tensorflow/blob/5dcfc51118817f27fad5246812d83e5dccdc5f72/tensorflow/security/fuzzing/immutableConst_fuzz.py)       | Phase 2       | TensorFlow       | OOB write |
-| 65 | [CVE-2020-26267](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-26267&scoretype=cvssv2)     | tf.raw\_ops.DataFormatVecPermute()  | Phase 2       | TensorFlow       | OOB read  |
-| 66 | [CVE-2020-26266](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-26266&scoretype=cvssv2)     | [uninitialized QUInt8](https://github.com/tensorflow/tensorflow/commit/ace0c15a22f7f054abcc1f53eabbcb0a1239a9e2) | Phase 2       | TensorFlow       | uninitialized memory access    |
-| 67 | [CVE-2020-15266](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15266&scoretype=cvssv2)     | [tf.image.crop\_and\_resize.ParseAndCheckBoxSizes()](https://github.com/tensorflow/tensorflow/pull/42143/commits/3ade2efec2e90c6237de32a19680caaa3ebc2845)| Phase 2       | TensorFlow       | DoS (seg fault)                |
-| 68 | [CVE-2020-15265](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15265&scoretype=cvssv2)     | [tf.quantization.quantize\_and\_dequantize()](https://github.com/tensorflow/tensorflow/commit/eccb7ec454e6617738554a255d77f08e60ee0808)| Phase 2       | TensorFlow       | OOB read  |
-| 69 | [CVE-2020-15206](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15206&scoretype=cvssv2)     | [LoadSavedModel()](https://github.com/tensorflow/tensorflow/commit/adf095206f25471e864a8e63a0f1caef53a0e3a6)| Phase 2       | TensorFlow       | DoS (segfault)                 |
-| 70 | [CVE-2020-15205](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15205&scoretype=cvssv2)     | [tf.raw\_ops.StringNGrams()](https://github.com/tensorflow/tensorflow/commit/0462de5b544ed4731aa2fb23946ac22c01856b80) | Phase 2       | TensorFlow       | Buffer Overflow                |
-| 71 | [CVE-2020-15204](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15204&scoretype=cvssv2)     | [tf.raw\_ops.GetSessionHandle()](https://github.com/tensorflow/tensorflow/commit/9a133d73ae4b4664d22bd1aa6d654fec13c52ee1)| Phase 2       | TensorFlow       | null pointer deref             |
-| 72 | [CVE-2020-15203](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15203&scoretype=cvssv2)     | [tf.strings.as\_string()](https://github.com/tensorflow/tensorflow/commit/33be22c65d86256e6826666662e40dbdfe70ee83) | Phase 2       | TensorFlow       | Format string vul.             |
-| 73 | [CVE-2020-15202](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15203&scoretype=cvssv2)     | [Shard()](https://github.com/tensorflow/tensorflow/commit/ca8c013b5e97b1373b3bb1c97ea655e69f31a575) | Phase 2       | TensorFlow       | Format string vul.             |
-| 74 | [CVE-2020-15201](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15203&scoretype=cvssv2)     | [RaggedCountSparseOutput()](https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02)  | Phase 2       | TensorFlow       | Buffer Overflow                |
-| 75 | [CVE-2020-15200](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15200&scoretype=cvssv2)     | [RaggedCountSparseOutput()](https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02)| Phase 2       | TensorFlow       | Buffer Overflow                |
-| 76 | [CVE-2020-15199](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15199&scoretype=cvssv2)     | [RaggedCountSparseOutput()](https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02)| Phase 2       | TensorFlow       | null pointer deref             |
-| 77 | [CVE-2020-15198](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15198&scoretype=cvssv2)     | [SparseCountSparseOutput()](https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02)| Phase 2       | TensorFlow       | OOB read  |
-| 78 | [CVE-2020-15197](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15197&scoretype=cvssv2)     | [SparseCountSparseOutput()](https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02)| Phase 2       | TensorFlow       | OOB write |
-| 79 | [CVE-2020-15196](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15196&scoretype=cvssv2)     | [SparseCountSparseOutput(), RaggedCountSparseOutput()](https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02)  | Phase 2       | TensorFlow       | OOB read  |
-| 80 | [CVE-2020-15195](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15195&scoretype=cvssv2)     | [SparseFillEmptyRowsGrad()](https://github.com/tensorflow/tensorflow/commit/390611e0d45c5793c7066110af37c8514e6a6c54) | Phase 2       | TensorFlow       | Buffer Overflow                |
-| 81 | [CVE-2020-15194](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15194&scoretype=cvssv2)     | [SparseFillEmptyRowsGrad()](https://github.com/tensorflow/tensorflow/commit/390611e0d45c5793c7066110af37c8514e6a6c54) | Phase 2       | TensorFlow       | DoS (assertion failure)        |
-| 82 | [CVE-2020-15193](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15193&scoretype=cvssv2)     | [dlpack.to\_dlpack()](https://github.com/tensorflow/tensorflow/commit/22e07fb204386768e5bcbea563641ea11f96ceb8)| Phase 2       | TensorFlow       | memory corruption              |
-| 83 | [CVE-2020-15192](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15192&scoretype=cvssv2)     | [dlpack.to\_dlpack()](https://github.com/tensorflow/tensorflow/commit/22e07fb204386768e5bcbea563641ea11f96ceb8)| Phase 2       | TensorFlow       | DoS (seg fault)                |
-| 84 | [CVE-2020-15191](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15191&scoretype=cvssv2)     | [dlpack.to\_dlpack()](https://github.com/tensorflow/tensorflow/commit/22e07fb204386768e5bcbea563641ea11f96ceb8)| Phase 2       | TensorFlow       | null pointer deref             |
-| 85 | [CVE-2020-15190](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15190&scoretype=cvssv2)     | [tf.raw\_ops.Switch()](https://github.com/tensorflow/tensorflow/commit/da8558533d925694483d2c136a9220d6d49d843c)| Phase 2       | TensorFlow       | null pointer deref             |
-| 86 | [CVE-2019-16778](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-16778&scoretype=cvssv2)     | [num\_segments](https://github.com/tensorflow/tensorflow/commit/db4f9717c41bccc3ce10099ab61996b246099892)| Phase 2       | TensorFlow       | Buffer Overflow                |
-| 87  | [CVE-2019-9423](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-9423&scoretype=cvssv2)       |  Android  | Phase 2| OpenCV           | OOB read  |
-| 88  | [CVE-2019-16249](https://vulmon.com/vulnerabilitydetails?qid=CVE-2019-16249&scoretype=cvssv2)     | [v\_load](https://github.com/opencv/opencv/blob/master/modules/core/include/opencv2/core/hal/intrin_sse.hpp)  | Phase 2       | OpenCV           | OOB read  |
-| 89  | [CVE-2016-10658](https://vulmon.com/vulnerabilitydetails?qid=CVE-2016-10658&scoretype=cvssv2)     | [dll\_files: function](https://github.com/BloodAxe/npm-native-opencv/blob/master/opencv.js)| Phase 1       | OpenCV           | MITM attack                    |
-| 90  | [CVE-2014-1858](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-1858&scoretype=cvssv2)       | [compile()](https://github.com/numpy/numpy/commit/0bb46c1448b0d3f5453d5182a17ea7ac5854ee15) | Phase 1       | Numpy            | Arbitrary file writes (symlink attack)              |
-| 91  | [CVE-2014-1859](https://vulmon.com/vulnerabilitydetails?qid=CVE-2014-1859&scoretype=cvssv2)       | [test\_open\_with\_filename()](https://git01lab.cs.univie.ac.at/karynav98/meen/-/blob/e01310384b36cd8b5fb2aabf34b0cdad9373f04c/venv/lib/python3.7/site-packages/numpy/core/tests/test_memmap.py)    | Phase 1       | Numpy            | Arbitrary file writes (symlink attack)              |
-| 92  | [CVE-2021-25289](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-25289&scoretype=cvssv2)     | [ImagingLibTiffDecode()](https://github.com/python-pillow/Pillow/blob/master/src/libImaging/TiffDecode.c)   | Phase 2       | pillow           | Buffer Overflow                |
-| 93 | [CVE-2021-25290](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-25290&scoretype=cvssv2)     | TiffDecode.c| Phase 2       | pillow           | DoS (seg fault)                |
-| 94 | [CVE-2021-25291](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-25291&scoretype=cvssv2)     | [TiffreadRGBATile()](https://github.com/python-pillow/Pillow/commit/cbdce6c5d054fccaf4af34b47f212355c64ace7a#diff-c14dc7d9af4fe076243626b59ced670427ab44b3db691e70f7a6ae0b2cc76264)                | Phase 2       | pillow           | OOB read  |
-| 95 | [CVE-2021-25292](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-25292&scoretype=cvssv2)     | [read\_pdf\_info(](https://github.com/python-pillow/Pillow/commit/3bce145966374dd39ce58a6fc0083f8d1890719c))  | Phase 1       | pillow           | DoS (ReDos)                    |
-| 96 | [CVE-2021-25293](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-25293&scoretype=cvssv2)     | [expandrow()](https://github.com/python-pillow/Pillow/commit/4853e522bddbec66022c0915b9a56255d0188bf9#)   | Phase 2       | pillow           | OOB read  |
-| 97 | [CVE-2021-27923](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-27923&scoretype=cvssv2)     | [PngImagePlugin.PngImageFile()](https://github.com/python-pillow/Pillow/commit/480f6819b592d7f07b9a9a52a7656c10bbe07442#diff-36db343209bdaf8bca08841a8d03f4daac59c37afe6f6d1aee6b7e8fd116fd88) | Phase 1       | pillow           | DoS (OOB write)                |
-| 98 | [CVE-2021-27922](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-27922&scoretype=cvssv2)     | [Jpeg2KImagePlugin.Jpeg2KImageFile(](https://github.com/python-pillow/Pillow/commit/480f6819b592d7f07b9a9a52a7656c10bbe07442#diff-36db343209bdaf8bca08841a8d03f4daac59c37afe6f6d1aee6b7e8fd116fd88)  | Phase 1       | pillow           | DoS (OOB write)                |
-| 99 | [CVE-2021-27921](https://vulmon.com/vulnerabilitydetails?qid=CVE-2021-27921&scoretype=cvssv2)     | [JpegImageFile(](https://github.com/python-pillow/Pillow/commit/480f6819b592d7f07b9a9a52a7656c10bbe07442#diff-36db343209bdaf8bca08841a8d03f4daac59c37afe6f6d1aee6b7e8fd116fd88))  | Phase 1       | pillow           | DoS (OOB write)                |
-| 100 | [CVE-2020-10994](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-10994&scoretype=cvssv2)     | [j2k\_decode\_entry()](https://github.com/python-pillow/Pillow/commit/cf6da6b79080a8c16984102fdc85f7ce28dca613#diff-86cd7a0c43a170b8d4867aaa6ff574a559ce101e2e6d8493151ebb5f3d62d0ff)    | Phase 1       | pillow           | OOB read  |
-| 101 | [CVE-2020-15214](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15214&scoretype=cvssv2)     | [Verifier()](https://github.com/InES-HPMM/Artificial_Intelligence_on_Microcontrollers/blob/21c819eac1b7cb8bf9bda1094783cbbd8a29f130/frameworks/tfLite/tensorflow/lite/model_test.cc)                | Phase 2       | TensorFlow       | OOB write |
-| 102 | [CVE-2020-15213](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15213&scoretype=cvssv2)     | [Verifier()](https://github.com/InES-HPMM/Artificial_Intelligence_on_Microcontrollers/blob/21c819eac1b7cb8bf9bda1094783cbbd8a29f130/frameworks/tfLite/tensorflow/lite/model_test.cc)                 | Phase 2       | TensorFlow       | DoS (OOB read)                 |
-| 103 | [CVE-2020-15208](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15208&scoretype=cvssv2)     | [TFLITE\_DCHECK()](https://github.com/tensorflow/tensorflow/commit/8ee24e7949a203d234489f9da2c5bf45a7d5157d)  | Phase 2       | TensorFlow       | OOB read/write                 |
-| 104 | [CVE-2020-15209](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15209&scoretype=cvssv2)     | [nullptr](https://github.com/tensorflow/tensorflow/security/advisories/GHSA-qh32-6jjc-qprm)| Phase 2       | TensorFlow       | DoS (null pointer deref)       |
-| 105 | [CVE-2020-15211](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15211&scoretype=cvssv2)     | [flatbuffer](https://github.com/tensorflow/tensorflow/security/advisories/GHSA-cvpc-8phh-8f45)    | Phase 2       | TensorFlow       | OOB read  |
-| 106 | [CVE-2020-15210](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15210&scoretype=cvssv2)      | TFLite      | Phase 2       | TensorFlow       | DoS (seg fault)                |
-| 107 | [CVE-2020-15212](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15212&scoretype=cvssv2)     | [segment\_ids\_data](https://github.com/tensorflow/tensorflow/security/advisories/GHSA-hx2x-85gr-wrpq)   | Phase 2       | TensorFlow       | OOB write |
-| 108 | [CVE-2020-15207](https://vulmon.com/vulnerabilitydetails?qid=CVE-2020-15207&scoretype=cvssv2)     | [ResolveAxis](https://github.com/tensorflow/tensorflow/commit/2d88f470dea2671b430884260f3626b1fe99830a) | Phase 2       | TensorFlow       | OOB read  |
-| 109 | [CVE-2018-10055](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-10055&scoretype=cvssv2)     | [info.data\_type](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/security/advisory/tfsa-2018-006.md)   | Phase 2       | TensorFlow       | Buffer Overflow (OOB read)     |
-| 110 | [CVE-2018-8825](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-8825&scoretype=cvssv2)       | [toco](https://github.com/tensorflow/tensorflow/commit/41335abb46f80ca644b5738550daef6136ba5476)  | Phase 2       | TensorFlow       | Buffer Overflow                |
-| 111 | [CVE-2018-7577](https://vulmon.com/vulnerabilitydetails?qid=CVE-2018-7577&scoretype=cvssv2)       | [genrule.cmd](https://github.com/tensorflow/tensorflow/commit/dfa9921e6343727b05f42f8d4a918b19528ff994)  | Phase 1       | TensorFlow       | OOB read  |
+| **ID** | **Framework** | **CVE**        | **API Type**    | **Vulnerable API/Variable**                    |
+|--------|---------------|----------------|-----------------|------------------------------------------------|
+|    1   |     OpenCV    | CVE-2019-5064  | Data Loading    | CV_FS_MAX_LEN                                  |
+|    2   |     OpenCV    | CVE-2019-5063  | Data Loading    | CV_FS_MAX_LEN                                  |
+|    3   |     OpenCV    | CVE-2019-14493 | Data Loading    | cv::XMLParser::parse()                         |
+|    4   |     OpenCV    | CVE-2019-14492 | Data processing | HaarEvaluator::OptFeature::calc()              |
+|    5   |     OpenCV    | CVE-2019-14491 | Data processing | cv::predictOrdered<cv::HaarEvaluator>          |
+|    6   |     OpenCV    | CVE-2018-5269  | Data Loading    | cv::RBaseStream::setPos()                      |
+|    7   |     OpenCV    | CVE-2018-5268  | Data Loading    | cv::Jpeg2KDecoder::readComponent8u()           |
+|    8   |     OpenCV    | CVE-2017-18009 | Data Loading    | cv::HdrDecoder::checkSignature()               |
+|    9   |     OpenCV    | CVE-2017-17760 | Data Loading    | cv::PxMDecoder::readData()                     |
+|   10   |     OpenCV    | CVE-2017-14136 | Data Loading    | FillColorRow1()                                |
+|   11   |     OpenCV    | CVE-2017-12864 | Data Loading    | ReadNumber()                                   |
+|   12   |     OpenCV    | CVE-2017-12863 | Data Loading    | PxMDecoder::readData()                         |
+|   13   |     OpenCV    | CVE-2017-12862 | Data Loading    | AutoBuffer                                     |
+|   14   |     OpenCV    | CVE-2017-12606 | Data Loading    | FillColorRow4()                                |
+|   15   |     OpenCV    | CVE-2017-12605 | Data Loading    | FillColorRow8()                                |
+|   16   |     OpenCV    | CVE-2017-12604 | Data Loading    | FillUniColor()                                 |
+|   17   |     OpenCV    | CVE-2017-12602 | Data Loading    | PxMDecoder::readData()                         |
+|   18   |     OpenCV    | CVE-2017-12600 | Data Loading    | PxMDecoder::readData()                         |
+|   19   |     OpenCV    | CVE-2017-12599 | Data Loading    | icvCvt_BGRA2BGR_8u_C4C3R()                     |
+|   20   |     OpenCV    | CVE-2017-12598 | Data Loading    | cv::RBaseStream::readBlock()                   |
+|   21   |     OpenCV    | CVE-2017-12597 | Data Loading    | FillColorRow1()                                |
+|   22   |     OpenCV    | CVE-2016-1517  | Data Loading    | faces.size( )                                  |
+|   23   |     Pillow    | CVE-2022-24303 | Visualizing     | im.show()                                      |
+|   24   |     Pillow    | CVE-2022-22817 | Data processing | PIL.ImageMath.eval()                           |
+|   25   |     Pillow    | CVE-2022-22816 | Data Loading    | path_getbbox(), ImagePath.Path                 |
+|   26   |     Pillow    | CVE-2022-22815 | Data Loading    | path_getbbox(), ImagePath.Path                 |
+|   27   |     Pillow    | CVE-2021-34552 | Data processing | convert()                                      |
+|   28   |     Pillow    | CVE-2021-28678 | Data Loading    | BlpImagePlugin()                               |
+|   29   |     Pillow    | CVE-2021-28677 | Data Loading    | EPSImageFile                                   |
+|   30   |     Pillow    | CVE-2021-28676 | Data processing | FliDecode()                                    |
+|   31   |     Pillow    | CVE-2021-28675 | Data Loading    | Image.open()                                   |
+|   32   |     Pillow    | CVE-2021-27923 | Data Loading    | PngImagePlugin.PngImageFile()                  |
+|   33   |     Pillow    | CVE-2021-27922 | Data Loading    | Jpeg2KImagePlugin.Jpeg2KImageFile(             |
+|   34   |     Pillow    | CVE-2021-27921 | Data Loading    | JpegImageFile()                                |
+|   35   |     Pillow    | CVE-2021-25293 | Data processing | expandrow()                                    |
+|   36   |     Pillow    | CVE-2021-25292 | Data Loading    | read_pdf_info()                                |
+|   37   |     Pillow    | CVE-2021-25291 | Data processing | TiffreadRGBATile()                             |
+|   38   |     Pillow    | CVE-2021-25290 | Data processing | _TIFFmemcpy()                                  |
+|   39   |     Pillow    | CVE-2021-25289 | Data processing | ImagingLibTiffDecode()                         |
+|   40   |     Pillow    | CVE-2020-5313  | Data Loading    | ImagingFliDecode()                             |
+|   41   |     Pillow    | CVE-2020-5312  | Data Loading    | ImagingPcxDecode()                             |
+|   42   |     Pillow    | CVE-2020-5311  | Data Loading    | expandrow()                                    |
+|   43   |     Pillow    | CVE-2020-5310  | Data Loading    | ImagingLibTiffDecode()                         |
+|   44   |     Pillow    | CVE-2020-35655 | Data Loading    | ImagingSgiRleDecode()                          |
+|   45   |     Pillow    | CVE-2020-35654 | Data Loading    | _decodeStripYCbCr()                            |
+|   46   |     Pillow    | CVE-2020-35653 | Data Loading    | ImagingPcxDecode()                             |
+|   47   |     Pillow    | CVE-2020-11538 | Data Loading    | expandrow()                                    |
+|   48   |     Pillow    | CVE-2020-10994 | Data Loading    | j2k_decode_entry()                             |
+|   49   |     Pillow    | CVE-2020-10379 | Data Loading    | ReadTile()                                     |
+|   50   |     Pillow    | CVE-2020-10378 | Data Loading    | ImagingPcxDecode()                             |
+|   51   |     Pillow    | CVE-2020-10177 | Data Loading    | ImagingFliDecode()                             |
+|   52   |     Pillow    | CVE-2019-19911 | Data Loading    | _open_index()                                  |
+|   53   |     Pillow    | CVE-2019-16865 | Data Loading    | Image.getexif()                                |
+|   54   |     Pillow    | CVE-2016-9190  | Data Loading    | ImagingNew()                                   |
+|   55   |     Pillow    | CVE-2016-9189  | Data Loading    | PyImaging_MapBuffer()                          |
+|   56   |     Pillow    | CVE-2016-4009  | Data processing | ImagingResampleHorizontal()                    |
+|   57   |     Pillow    | CVE-2016-3076  | Data Loading    | j2k_encode_entry()                             |
+|   58   |     Pillow    | CVE-2016-2533  | Data Loading    | ImagingPcdDecode()                             |
+|   59   |     Pillow    | CVE-2016-0775  | Data Loading    | ImagingFliDecode()                             |
+|   60   |     Pillow    | CVE-2016-0740  | Data Loading    | ImagingLibTiffDecode()                         |
+|   61   |     Pillow    | CVE-2014-9601  | Data Loading    | chunk_iCCP()                                   |
+|   62   |     Pillow    | CVE-2014-3598  | Data Loading    | Jpeg2KImageFile()                              |
+|   63   |     Pillow    | CVE-2014-3589  | Data Loading    | __init__()                                     |
+|   64   |     Pillow    | CVE-2014-3007  | Data Loading    | load_djpeg()                                   |
+|   65   |     Pillow    | CVE-2014-1933  | Data Loading    | load_djpeg() and Ghostscript()                 |
+|   66   |     Pillow    | CVE-2014-1932  | Data Loading    | load_djpe(), Ghostscript(), load() amd _copy() |
+|   67   |     Numpy     | CVE-2017-12852 | Data processing | pad()                                          |
+|   68   |     Numpy     | CVE-2014-1859  | Data Loading    | test_open_with_filename()                      |
+|   69   |     Numpy     | CVE-2014-1858  | Data Loading    | compile()                                      |
+|   70   | Tensorflow    | CVE-2022-23568 | Data processing | AddManySparseToTensorsMap                      |
+|   71   | Tensorflow    | CVE-2022-23567 | Data processing | TensorShape                                    |
+|   72   | Tensorflow    | CVE-2022-21740 | Data processing | SparseCountSparseOutput                        |
+|   73   | Tensorflow    | CVE-2022-21739 | Data processing | QuantizedMaxPool                               |
+|   74   | Tensorflow    | CVE-2022-21738 | Data processing | SparseCountSparseOutput                        |
+|   75   | Tensorflow    | CVE-2022-21737 | Data processing | Bincount                                       |
+|   76   | Tensorflow    | CVE-2022-21736 | Data processing | SparseTensorSliceDataset                       |
+|   77   | Tensorflow    | CVE-2022-21735 | Data processing | FractionalMaxPool                              |
+|   78   | Tensorflow    | CVE-2022-21734 | Data processing | MapStage                                       |
+|   79   | Tensorflow    | CVE-2022-21733 | Data processing | StringNGrams                                   |
+|   80   | Tensorflow    | CVE-2022-21732 | Data processing | ThreadPoolHandle                               |
+|   81   | Tensorflow    | CVE-2022-21731 | Data processing | ConcatV2                                       |
+|   82   | Tensorflow    | CVE-2022-21730 | Data processing | FractionalAvgPoolGrad                          |
+|   83   | Tensorflow    | CVE-2022-21729 | Data processing | UnravelIndex                                   |
+|   84   | Tensorflow    | CVE-2022-21728 | Data processing | ReverseSequence                                |
+|   85   | Tensorflow    | CVE-2022-21727 | Data processing | Dequantize                                     |
+|   86   | Tensorflow    | CVE-2022-21726 | Data processing | Dequantize                                     |
+|   87   | Tensorflow    | CVE-2022-21725 | Data processing | AvgPoolGrad                                    |
+|   88   | Tensorflow    | CVE-2021-41226 | Data processing | SparseBinCount                                 |
+|   89   | Tensorflow    | CVE-2021-41224 | Data processing | SparseFillEmptyRows                            |
+|   90   | Tensorflow    | CVE-2021-41223 | Data processing | FusedBatchNorm                                 |
+|   91   | Tensorflow    | CVE-2021-41222 | Data processing | SplitV                                         |
+|   92   | Tensorflow    | CVE-2021-41221 | Data processing | Cudnn                                          |
+|   93   | Tensorflow    | CVE-2021-41219 | Data processing | SparseMatMul                                   |
+|   94   | Tensorflow    | CVE-2021-41218 | Data processing | AllToAll                                       |
+|   95   | Tensorflow    | CVE-2021-41217 | Data processing | Exit                                           |
+|   96   | Tensorflow    | CVE-2021-41216 | Data processing | Transpose                                      |
+|   97   | Tensorflow    | CVE-2021-41215 | Data processing | DeserializeSparse                              |
+|   98   | Tensorflow    | CVE-2021-41214 | Data processing | raggedcross                                    |
+|   99   | Tensorflow    | CVE-2021-41213 | Data processing | tf.function                                    |
+|   100  | Tensorflow    | CVE-2021-41212 | Data processing | raggedcross                                    |
+|   101  | Tensorflow    | CVE-2021-41211 | Data processing | QuantizeV2                                     |
+|   102  | Tensorflow    | CVE-2021-41210 | Data processing | SparseCountSparseOutput                        |
+|   103  | Tensorflow    | CVE-2021-41207 | Data processing | ParallelConcat                                 |
+|   104  | Tensorflow    | CVE-2021-41205 | Data processing | QuantizeAndDequantizeV                         |
+|   105  | Tensorflow    | CVE-2021-41202 | Data processing | range                                          |
+|   106  | Tensorflow    | CVE-2021-41200 | Storing         | createfilewriter                               |
+|   107  | Tensorflow    | CVE-2021-41199 | Data processing | resize                                         |
+|   108  | Tensorflow    | CVE-2021-41198 | Data processing | tile                                           |
+|   109  | Tensorflow    | CVE-2021-41196 | Data processing | MaxPooling3D                                   |
+|   110  | Tensorflow    | CVE-2021-41195 | Data processing | AddDim                                         |
+|   111  | Tensorflow    | CVE-2021-37688 | Data processing | invoke                                         |
+|   112  | Tensorflow    | CVE-2021-37687 | Data processing | GatherNd                                       |
+|   113  | Tensorflow    | CVE-2021-37679 | Data processing | mapfn                                          |
+|   114  | Tensorflow    | CVE-2021-37678 | Data Loading    | modelfromyaml                                  |
+|   115  | Tensorflow    | CVE-2021-37677 | Data processing | Dequantize                                     |
+|   116  | Tensorflow    | CVE-2021-37676 | Data processing | SparseFillEmptyRows                            |
+|   117  | Tensorflow    | CVE-2021-37675 | Data processing | Conv2D                                         |
+|   118  | Tensorflow    | CVE-2021-37674 | Data processing | MaxPoolGrad                                    |
+|   119  | Tensorflow    | CVE-2021-37673 | Data processing | MapStage                                       |
+|   120  | Tensorflow    | CVE-2021-37672 | Data processing | SdcaOptimizerV2                                |
+|   121  | Tensorflow    | CVE-2021-37671 | Data processing | MapPeek                                        |
+|   122  | Tensorflow    | CVE-2021-37670 | Data processing | UpperBound                                     |
+|   123  | Tensorflow    | CVE-2021-37669 | Data processing | NonMaxSuppressionV5                            |
+|   124  | Tensorflow    | CVE-2021-37668 | Data processing | UnravelIndex                                   |
+|   125  | Tensorflow    | CVE-2021-37667 | Data processing | UnicodeEncode                                  |
+|   126  | Tensorflow    | CVE-2021-37666 | Data processing | RaggedTensorToVariant                          |
+|   127  | Tensorflow    | CVE-2021-37665 | Data processing | RequantizationRangePerChannel                  |
+|   128  | Tensorflow    | CVE-2021-37664 | Data processing | BoostedTreesSparseCalculateBestFeatureSplit    |
+|   129  | Tensorflow    | CVE-2021-37663 | Data processing | QuantizeV2                                     |
+|   130  | Tensorflow    | CVE-2021-37662 | Data processing | BoostedTreesCalculateBestGainsPerFeature       |
+|   131  | Tensorflow    | CVE-2021-37661 | Data processing | Variable                                       |
+|   132  | Tensorflow    | CVE-2021-37660 | Data processing | InplaceSub                                     |
+|   133  | Tensorflow    | CVE-2021-37659 | Data processing | SqrtGrad                                       |
+|   134  | Tensorflow    | CVE-2021-37658 | Data processing | MatrixSetDiagV3                                |
+|   135  | Tensorflow    | CVE-2021-37657 | Data processing | MatrixDiagV3                                   |
+|   136  | Tensorflow    | CVE-2021-37656 | Data processing | RaggedTensorToSparse                           |
+|   137  | Tensorflow    | CVE-2021-37655 | Data processing | ResourceScatterUpdate                          |
+|   138  | Tensorflow    | CVE-2021-37654 | Data processing | ResourceGather                                 |
+|   139  | Tensorflow    | CVE-2021-37653 | Data processing | ResourceGather                                 |
+|   140  | Tensorflow    | CVE-2021-37652 | Data processing | BoostedTreesCreateEnsemble                     |
+|   141  | Tensorflow    | CVE-2021-37651 | Data processing | FractionalAvgPoolGrad                          |
+|   142  | Tensorflow    | CVE-2021-37650 | Storing         | ExperimentalDatasetToTFRecord                  |
+|   143  | Tensorflow    | CVE-2021-37649 | Data processing | UncompressElement                              |
+|   144  | Tensorflow    | CVE-2021-37648 | Data processing | SaveV2                                         |
+|   145  | Tensorflow    | CVE-2021-37647 | Data processing | SparseTensorSliceDataset                       |
+|   146  | Tensorflow    | CVE-2021-37646 | Data processing | StringNGrams                                   |
+|   147  | Tensorflow    | CVE-2021-37645 | Data processing | QuantizeAndDequantizeV4Grad                    |
+|   148  | Tensorflow    | CVE-2021-37644 | Data processing | TensorListReserve                              |
+|   149  | Tensorflow    | CVE-2021-37643 | Data processing | MatrixDiagPartV2                               |
+|   150  | Tensorflow    | CVE-2021-37642 | Data processing | ResourceScatterDiv                             |
+|   151  | Tensorflow    | CVE-2021-37641 | Data processing | RaggedGather                                   |
+|   152  | Tensorflow    | CVE-2021-37640 | Data processing | SparseReshape                                  |
+|   153  | Tensorflow    | CVE-2021-37639 | Data Loading    | Restore                                        |
+|   154  | Tensorflow    | CVE-2021-37638 | Data processing | RaggedTensorToTensor                           |
+|   155  | Tensorflow    | CVE-2021-37637 | Data processing | CompressElement                                |
+|   156  | Tensorflow    | CVE-2021-37636 | Data processing | SparseDenseCwiseDiv                            |
+|   157  | Tensorflow    | CVE-2021-37635 | Data processing | SparseTensor                                   |
+|   158  | Tensorflow    | CVE-2021-29618 | Data processing | transpose                                      |
+|   159  | Tensorflow    | CVE-2021-29617 | Data processing | substr                                         |
+|   160  | Tensorflow    | CVE-2021-29614 | Data processing | decoderaw                                      |
+|   161  | Tensorflow    | CVE-2021-29613 | Data processing | CTCLoss                                        |
+|   162  | Tensorflow    | CVE-2021-29612 | Data processing | BandedTriangularSolve                          |
+|   163  | Tensorflow    | CVE-2021-29611 | Data processing | SparseReshape                                  |
+|   164  | Tensorflow    | CVE-2021-29610 | Data processing | QuantizeAndDequantizeV2                        |
+|   165  | Tensorflow    | CVE-2021-29609 | Data processing | SparseAdd                                      |
+|   166  | Tensorflow    | CVE-2021-29608 | Data processing | RaggedTensorToTensor                           |
+|   167  | Tensorflow    | CVE-2021-29607 | Data processing | SparseSparseMinimum                            |
+|   168  | Tensorflow    | CVE-2021-29584 | Data processing | SparseSplit                                    |
+|   169  | Tensorflow    | CVE-2021-29583 | Data processing | FusedBatchNorm                                 |
+|   170  | Tensorflow    | CVE-2021-29582 | Data processing | Dequantize                                     |
+|   171  | Tensorflow    | CVE-2021-29581 | Data processing | CTCBeamSearchDecoder                           |
+|   172  | Tensorflow    | CVE-2021-29580 | Data processing | FractionalMaxPoolGrad                          |
+|   173  | Tensorflow    | CVE-2021-29579 | Data processing | MaxPoolGrad                                    |
+|   174  | Tensorflow    | CVE-2021-29578 | Data processing | FractionalAvgPoolGrad                          |
+|   175  | Tensorflow    | CVE-2021-29577 | Data processing | AvgPool3DGrad                                  |
+|   176  | Tensorflow    | CVE-2021-29576 | Data processing | MaxPool3DGradGrad                              |
+|   177  | Tensorflow    | CVE-2021-29575 | Data processing | ReverseSequence                                |
+|   178  | Tensorflow    | CVE-2021-29574 | Data processing | MaxPool3DGradGrad                              |
+|   179  | Tensorflow    | CVE-2021-29573 | Data processing | MaxPoolGradWithArgmax                          |
+|   180  | Tensorflow    | CVE-2021-29572 | Data processing | SdcaOptimizer                                  |
+|   181  | Tensorflow    | CVE-2021-29571 | Data processing | DrawBoundingBoxesV2                            |
+|   182  | Tensorflow    | CVE-2021-29570 | Data processing | MaxPoolGradWithArgmax                          |
+|   183  | Tensorflow    | CVE-2021-29569 | Data processing | RequantizationRange                            |
+|   184  | Tensorflow    | CVE-2021-29568 | Data processing | ParameterizedTruncatedNormal                   |
+|   185  | Tensorflow    | CVE-2021-29567 | Data processing | SparseDenseCwiseMul                            |
+|   186  | Tensorflow    | CVE-2021-29566 | Data processing | Dilation2DBackpropInput                        |
+|   187  | Tensorflow    | CVE-2021-29565 | Data processing | SparseFillEmptyRows                            |
+|   188  | Tensorflow    | CVE-2021-29564 | Data processing | EditDistance                                   |
+|   189  | Tensorflow    | CVE-2021-29563 | Data processing | RFFT                                           |
+|   190  | Tensorflow    | CVE-2021-29562 | Data processing | IRFFT                                          |
+|   191  | Tensorflow    | CVE-2021-29561 | Data Loading    | LoadAndRemapMatrix                             |
+|   192  | Tensorflow    | CVE-2021-29560 | Data processing | RaggedTensorToTensor                           |
+|   193  | Tensorflow    | CVE-2021-29559 | Data processing | UnicodeEncode                                  |
+|   194  | Tensorflow    | CVE-2021-29558 | Data processing | SparseSplit                                    |
+|   195  | Tensorflow    | CVE-2021-29557 | Data processing | SparseMatMul                                   |
+|   196  | Tensorflow    | CVE-2021-29556 | Data processing | Reverse                                        |
+|   197  | Tensorflow    | CVE-2021-29555 | Data processing | FusedBatchNorm                                 |
+|   198  | Tensorflow    | CVE-2021-29554 | Data processing | DenseCountSparseOutput                         |
+|   199  | Tensorflow    | CVE-2021-29553 | Data processing | QuantizeAndDequantizeV3                        |
+|   200  | Tensorflow    | CVE-2021-29552 | Data processing | UnsortedSegmentJoin                            |
+|   201  | Tensorflow    | CVE-2021-29551 | Data processing | MatrixTriangularSolve                          |
+|   202  | Tensorflow    | CVE-2021-29550 | Data processing | FractionalAvgPool                              |
+|   203  | Tensorflow    | CVE-2021-29549 | Data processing | QuantizedAdd                                   |
+|   204  | Tensorflow    | CVE-2021-29548 | Data processing | QuantizedBatchNormWithGlobalNormalization      |
+|   205  | Tensorflow    | CVE-2021-29547 | Data processing | QuantizedBatchNormWithGlobalNormalization      |
+|   206  | Tensorflow    | CVE-2021-29546 | Data processing | QuantizedBiasAdd                               |
+|   207  | Tensorflow    | CVE-2021-29545 | Data processing | SparseTensor                                   |
+|   208  | Tensorflow    | CVE-2021-29544 | Data processing | QuantizeAndDequantizeV4Grad                    |
+|   209  | Tensorflow    | CVE-2021-29543 | Data processing | CTCGreedyDecoder                               |
+|   210  | Tensorflow    | CVE-2021-29542 | Data processing | StringNGrams                                   |
+|   211  | Tensorflow    | CVE-2021-29541 | Data processing | StringNGrams                                   |
+|   212  | Tensorflow    | CVE-2021-29540 | Data processing | Conv2DBackpropFilter                           |
+|   213  | Tensorflow    | CVE-2021-29539 | Data processing | ImmutableConst                                 |
+|   214  | Tensorflow    | CVE-2021-29538 | Data processing | Conv2DBackpropFilter                           |
+|   215  | Tensorflow    | CVE-2021-29537 | Data processing | QuantizedResizeBilinear                        |
+|   216  | Tensorflow    | CVE-2021-29536 | Data processing | QuantizedReshape                               |
+|   217  | Tensorflow    | CVE-2021-29535 | Data processing | QuantizedMul                                   |
+|   218  | Tensorflow    | CVE-2021-29534 | Data processing | SparseConcat                                   |
+|   219  | Tensorflow    | CVE-2021-29533 | Data processing | DrawBoundingBoxes                              |
+|   220  | Tensorflow    | CVE-2021-29532 | Data processing | RaggedCross                                    |
+|   221  | Tensorflow    | CVE-2021-29531 | Data processing | EncodePng                                      |
+|   222  | Tensorflow    | CVE-2021-29530 | Data processing | SparseTensor                                   |
+|   223  | Tensorflow    | CVE-2021-29529 | Data processing | QuantizedResizeBilinear                        |
+|   224  | Tensorflow    | CVE-2021-29528 | Data processing | QuantizedMul                                   |
+|   225  | Tensorflow    | CVE-2021-29527 | Data processing | QuantizedConv2D                                |
+|   226  | Tensorflow    | CVE-2021-29526 | Data processing | Conv2D                                         |
+|   227  | Tensorflow    | CVE-2021-29525 | Data processing | Conv2DBackpropInput                            |
+|   228  | Tensorflow    | CVE-2021-29524 | Data processing | Conv2DBackpropFilter                           |
+|   229  | Tensorflow    | CVE-2021-29523 | Data processing | AddManySparseToTensorsMap                      |
+|   230  | Tensorflow    | CVE-2021-29522 | Data processing | Conv3DBackpropInputV2                          |
+|   231  | Tensorflow    | CVE-2021-29521 | Data processing | SparseCountSparseOutput                        |
+|   232  | Tensorflow    | CVE-2021-29520 | Data processing | Conv3DBackpropInputV2                          |
+|   233  | Tensorflow    | CVE-2021-29519 | Data processing | SparseCross                                    |
+|   234  | Tensorflow    | CVE-2021-29518 | Data processing | GetSessionTensor                               |
+|   235  | Tensorflow    | CVE-2021-29517 | Data processing | Conv3D                                         |
+|   236  | Tensorflow    | CVE-2021-29516 | Data processing | Conv3D                                         |
+|   237  | Tensorflow    | CVE-2021-29515 | Data processing | MatrixDiagV2                                   |
+|   238  | Tensorflow    | CVE-2021-29513 | Data processing | truncatednormal                                |
+|   239  | Tensorflow    | CVE-2021-29512 | Data processing | RaggedBincount                                 |
+|   240  | Tensorflow    | CVE-2020-26269 | Data processing | GetMatchingPaths()                             |
+|   241  | Tensorflow    | CVE-2020-26268 | Data processing | tf.raw_ops.ImmutableConst()                    |
 
-| Phase   | OpenCV           | Numpy          | Pillow         | TensorFlow     | PyTorch | Caffe |
-| ------- | ---------------- | -------------- | -------------- | -------------- | ------- | ----- |
-| Phase1  | CVE-2019-5064    | CVE-2019-6446  | CVE-2021-25292 | CVE-2020-26271 | N/A     | N/A   |
-|         | CVE-2019-5063    | CVE-2014-1858  | CVE-2021-27923 | CVE-2019-9635  |         |       |
-|         | CVE-2019-14493   | CVE-2014-1859  | CVE-2021-27922 | CVE-2018-21233 |         |       |
-|         | CVE-2018-7714    |                | CVE-2021-27921 | CVE-2018-7575  |         |       |
-|         | CVE-2018-7713    |                | CVE-2020-10994 | CVE-2018-7576  |         |       |
-|         | CVE-2018-7712    |                | CVE-2020-5313  | CVE-2018-7577  |         |       |
-|         | CVE-2018-5269    |                | CVE-2020-5312  |                |         |       |
-|         | CVE-2018-5268    |                | CVE-2020-5311  |                |         |       |
-|         | CVE-2017-18009   |                | CVE-2020-5310  |                |         |       |
-|         | CVE-2017-17760   |                | CVE-2020-35655 |                |         |       |
-|         | CVE-2017-14136   |                | CVE-2020-35654 |                |         |       |
-|         | CVE-2017-12864   |                | CVE-2020-35653 |                |         |       |
-|         | CVE-2017-12863   |                | CVE-2020-11538 |                |         |       |
-|         | CVE-2017-12862   |                | CVE-2020-11538 |                |         |       |
-|         | CVE-2017-12606   |                | CVE-2020-10379 |                |         |       |
-|         | CVE-2017-12605   |                | CVE-2020-10378 |                |         |       |
-|         | CVE-2017-12604   |                | CVE-2020-10177 |                |         |       |
-|         | CVE-2017-12603   |                | CVE-2019-19911 |                |         |       |
-|         | CVE-2017-12602   |                | CVE-2019-16865 |                |         |       |
-|         | CVE-2017-12601   |                | CVE-2016-9190  |                |         |       |
-|         | CVE-2017-12600   |                | CVE-2016-9189  |                |         |       |
-|         | CVE-2017-12599   |                | CVE-2016-3076  |                |         |       |
-|         | CVE-2017-12598   |                | CVE-2016-2533  |                |         |       |
-|         | CVE-2017-12597   |                | CVE-2016-0775  |                |         |       |
-|         | CVE-2017-1000450 |                | CVE-2016-0740  |                |         |       |
-|         | CVE-2016-1516    |                | CVE-2014-9601  |                |         |       |
-|         | CVE-2016-1517    |                | CVE-2014-3598  |                |         |       |
-|         | CVE-2016-10658   |                | CVE-2014-3589  |                |         |       |
-|         |                  |                | CVE-2014-3007  |                |         |       |
-|         |                  |                | CVE-2014-1933  |                |         |       |
-|         |                  |                | CVE-2014-1932  |                |         |       |
-| Phase 2 | CVE-2019-19624   | CVE-2017-12852 | CVE-2016-4009  | CVE-2020-5215  | N/A     | N/A   |
-|         | CVE-2019-15939   |                | CVE-2021-25289 | CVE-2020-26270 |         |       |
-|         | CVE-2019-14492   |                | CVE-2021-25290 | CVE-2020-26269 |         |       |
-|         | CVE-2019-14491   |                | CVE-2021-25291 | CVE-2020-26268 |         |       |
-|         | CVE-2019-16249   |                | CVE-2021-25293 | CVE-2020-26267 |         |       |
-|         |                  |                |                | CVE-2020-26266 |         |       |
-|         |                  |                |                | CVE-2020-15266 |         |       |
-|         |                  |                |                | CVE-2020-15265 |         |       |
-|         |                  |                |                | CVE-2020-15206 |         |       |
-|         |                  |                |                | CVE-2020-15205 |         |       |
-|         |                  |                |                | CVE-2020-15204 |         |       |
-|         |                  |                |                | CVE-2020-15203 |         |       |
-|         |                  |                |                | CVE-2020-15202 |         |       |
-|         |                  |                |                | CVE-2020-15201 |         |       |
-|         |                  |                |                | CVE-2020-15200 |         |       |
-|         |                  |                |                | CVE-2020-15199 |         |       |
-|         |                  |                |                | CVE-2020-15198 |         |       |
-|         |                  |                |                | CVE-2020-15197 |         |       |
-|         |                  |                |                | CVE-2020-15196 |         |       |
-|         |                  |                |                | CVE-2020-15195 |         |       |
-|         |                  |                |                | CVE-2020-15194 |         |       |
-|         |                  |                |                | CVE-2020-15193 |         |       |
-|         |                  |                |                | CVE-2020-15192 |         |       |
-|         |                  |                |                | CVE-2020-15191 |         |       |
-|         |                  |                |                | CVE-2020-15190 |         |       |
-|         |                  |                |                | CVE-2019-16778 |         |       |
-|         |                  |                |                | CVE-2018-21233 |         |       |
-|         |                  |                |                | CVE-2020-15214 |         |       |
-|         |                  |                |                | CVE-2020-15213 |         |       |
-|         |                  |                |                | CVE-2020-15208 |         |       |
-|         |                  |                |                | CVE-2020-15209 |         |       |
-|         |                  |                |                | CVE-2020-15211 |         |       |
-|         |                  |                |                | CVE-2020-15210 |         |       |
-|         |                  |                |                | CVE-2020-15212 |         |       |
-|         |                  |                |                | CVE-2020-15207 |         |       |
-|         |                  |                |                | CVE-2018-10055 |         |       |
-|         |                  |                |                | CVE-2018-8825  |         |       |
-| Phase 3 | N/A              | N/A            | N/A            | N/A            | N/A     | N/A   |
-| Phase 4 | N/A              | N/A            | N/A            | N/A            | N/A     | N/A   |
+|     **API Type**    |   **OpenCV**   |    **Numpy**   |   **Pillow**   | **TensorFlow** | **PyTorch** | **Caffe** |
+|:-------------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|:---------:|
+| **Data Loading**    | CVE-2019-5064  | CVE-2014-1859  | CVE-2022-22816 | CVE-2021-37678 | N/A         | N/A       |
+|                     | CVE-2019-5063  | CVE-2014-1858  | CVE-2022-22815 | CVE-2021-37639 |             |           |
+|                     | CVE-2019-14493 |                | CVE-2021-28678 | CVE-2021-29561 |             |           |
+|                     | CVE-2018-5269  |                | CVE-2021-28677 |                |             |           |
+|                     | CVE-2018-5268  |                | CVE-2021-28675 |                |             |           |
+|                     | CVE-2017-18009 |                | CVE-2021-27923 |                |             |           |
+|                     | CVE-2017-17760 |                | CVE-2021-27922 |                |             |           |
+|                     | CVE-2017-14136 |                | CVE-2021-27921 |                |             |           |
+|                     | CVE-2017-12864 |                | CVE-2021-25292 |                |             |           |
+|                     | CVE-2017-12863 |                | CVE-2020-5313  |                |             |           |
+|                     | CVE-2017-12862 |                | CVE-2020-5312  |                |             |           |
+|                     | CVE-2017-12606 |                | CVE-2020-5311  |                |             |           |
+|                     | CVE-2017-12605 |                | CVE-2020-5310  |                |             |           |
+|                     | CVE-2017-12604 |                | CVE-2020-35655 |                |             |           |
+|                     | CVE-2017-12602 |                | CVE-2020-35654 |                |             |           |
+|                     | CVE-2017-12600 |                | CVE-2020-35653 |                |             |           |
+|                     | CVE-2017-12599 |                | CVE-2020-11538 |                |             |           |
+|                     | CVE-2017-12598 |                | CVE-2020-10994 |                |             |           |
+|                     | CVE-2017-12597 |                | CVE-2020-10379 |                |             |           |
+|                     | CVE-2016-1517  |                | CVE-2020-10378 |                |             |           |
+|                     |                |                | CVE-2020-10177 |                |             |           |
+|                     |                |                | CVE-2019-19911 |                |             |           |
+|                     |                |                | CVE-2019-16865 |                |             |           |
+|                     |                |                | CVE-2016-9190  |                |             |           |
+|                     |                |                | CVE-2016-9189  |                |             |           |
+|                     |                |                | CVE-2016-3076  |                |             |           |
+|                     |                |                | CVE-2016-2533  |                |             |           |
+|                     |                |                | CVE-2016-0775  |                |             |           |
+|                     |                |                | CVE-2016-0740  |                |             |           |
+|                     |                |                | CVE-2014-9601  |                |             |           |
+|                     |                |                | CVE-2014-3598  |                |             |           |
+|                     |                |                | CVE-2014-3589  |                |             |           |
+|                     |                |                | CVE-2014-3007  |                |             |           |
+|                     |                |                | CVE-2014-1933  |                |             |           |
+|                     |                |                | CVE-2014-1932  |                |             |           |
+| **Data Processing** | CVE-2019-14492 | CVE-2017-12852 | CVE-2022-22817 | CVE-2022-23568 | N/A         | N/A       |
+|                     | CVE-2019-14491 |                | CVE-2021-34552 | CVE-2022-23567 |             |           |
+|                     |                |                | CVE-2021-28676 | CVE-2022-21740 |             |           |
+|                     |                |                | CVE-2021-25293 | CVE-2022-21739 |             |           |
+|                     |                |                | CVE-2021-25291 | CVE-2022-21738 |             |           |
+|                     |                |                | CVE-2021-25290 | CVE-2022-21737 |             |           |
+|                     |                |                | CVE-2021-25289 | CVE-2022-21736 |             |           |
+|                     |                |                | CVE-2016-4009  | CVE-2022-21735 |             |           |
+|                     |                |                |                | CVE-2022-21734 |             |           |
+|                     |                |                |                | CVE-2022-21733 |             |           |
+|                     |                |                |                | CVE-2022-21732 |             |           |
+|                     |                |                |                | CVE-2022-21731 |             |           |
+|                     |                |                |                | CVE-2022-21730 |             |           |
+|                     |                |                |                | CVE-2022-21729 |             |           |
+|                     |                |                |                | CVE-2022-21728 |             |           |
+|                     |                |                |                | CVE-2022-21727 |             |           |
+|                     |                |                |                | CVE-2022-21726 |             |           |
+|                     |                |                |                | CVE-2022-21725 |             |           |
+|                     |                |                |                | CVE-2021-41226 |             |           |
+|                     |                |                |                | CVE-2021-41224 |             |           |
+|                     |                |                |                | CVE-2021-41223 |             |           |
+|                     |                |                |                | CVE-2021-41222 |             |           |
+|                     |                |                |                | CVE-2021-41221 |             |           |
+|                     |                |                |                | CVE-2021-41219 |             |           |
+|                     |                |                |                | CVE-2021-41218 |             |           |
+|                     |                |                |                | CVE-2021-41217 |             |           |
+|                     |                |                |                | CVE-2021-41216 |             |           |
+|                     |                |                |                | CVE-2021-41215 |             |           |
+|                     |                |                |                | CVE-2021-41214 |             |           |
+|                     |                |                |                | CVE-2021-41213 |             |           |
+|                     |                |                |                | CVE-2021-41212 |             |           |
+|                     |                |                |                | CVE-2021-41211 |             |           |
+|                     |                |                |                | CVE-2021-41210 |             |           |
+|                     |                |                |                | CVE-2021-41207 |             |           |
+|                     |                |                |                | CVE-2021-41205 |             |           |
+|                     |                |                |                | CVE-2021-41202 |             |           |
+|                     |                |                |                | CVE-2021-41199 |             |           |
+|                     |                |                |                | CVE-2021-41198 |             |           |
+|                     |                |                |                | CVE-2021-41196 |             |           |
+|                     |                |                |                | CVE-2021-41195 |             |           |
+|                     |                |                |                | CVE-2021-37688 |             |           |
+|                     |                |                |                | CVE-2021-37687 |             |           |
+|                     |                |                |                | CVE-2021-37679 |             |           |
+|                     |                |                |                | CVE-2021-37677 |             |           |
+|                     |                |                |                | CVE-2021-37676 |             |           |
+|                     |                |                |                | CVE-2021-37675 |             |           |
+|                     |                |                |                | CVE-2021-37674 |             |           |
+|                     |                |                |                | CVE-2021-37673 |             |           |
+|                     |                |                |                | CVE-2021-37672 |             |           |
+|                     |                |                |                | CVE-2021-37671 |             |           |
+|                     |                |                |                | CVE-2021-37670 |             |           |
+|                     |                |                |                | CVE-2021-37669 |             |           |
+|                     |                |                |                | CVE-2021-37668 |             |           |
+|                     |                |                |                | CVE-2021-37667 |             |           |
+|                     |                |                |                | CVE-2021-37666 |             |           |
+|                     |                |                |                | CVE-2021-37665 |             |           |
+|                     |                |                |                | CVE-2021-37664 |             |           |
+|                     |                |                |                | CVE-2021-37663 |             |           |
+|                     |                |                |                | CVE-2021-37662 |             |           |
+|                     |                |                |                | CVE-2021-37661 |             |           |
+|                     |                |                |                | CVE-2021-37660 |             |           |
+|                     |                |                |                | CVE-2021-37659 |             |           |
+|                     |                |                |                | CVE-2021-37658 |             |           |
+|                     |                |                |                | CVE-2021-37657 |             |           |
+|                     |                |                |                | CVE-2021-37656 |             |           |
+|                     |                |                |                | CVE-2021-37655 |             |           |
+|                     |                |                |                | CVE-2021-37654 |             |           |
+|                     |                |                |                | CVE-2021-37653 |             |           |
+|                     |                |                |                | CVE-2021-37652 |             |           |
+|                     |                |                |                | CVE-2021-37651 |             |           |
+|                     |                |                |                | CVE-2021-37649 |             |           |
+|                     |                |                |                | CVE-2021-37648 |             |           |
+|                     |                |                |                | CVE-2021-37647 |             |           |
+|                     |                |                |                | CVE-2021-37646 |             |           |
+|                     |                |                |                | CVE-2021-37645 |             |           |
+|                     |                |                |                | CVE-2021-37644 |             |           |
+|                     |                |                |                | CVE-2021-37643 |             |           |
+|                     |                |                |                | CVE-2021-37642 |             |           |
+|                     |                |                |                | CVE-2021-37641 |             |           |
+|                     |                |                |                | CVE-2021-37640 |             |           |
+|                     |                |                |                | CVE-2021-37638 |             |           |
+|                     |                |                |                | CVE-2021-37637 |             |           |
+|                     |                |                |                | CVE-2021-37636 |             |           |
+|                     |                |                |                | CVE-2021-37635 |             |           |
+|                     |                |                |                | CVE-2021-29618 |             |           |
+|                     |                |                |                | CVE-2021-29617 |             |           |
+|                     |                |                |                | CVE-2021-29614 |             |           |
+|                     |                |                |                | CVE-2021-29613 |             |           |
+|                     |                |                |                | CVE-2021-29612 |             |           |
+|                     |                |                |                | CVE-2021-29611 |             |           |
+|                     |                |                |                | CVE-2021-29610 |             |           |
+|                     |                |                |                | CVE-2021-29609 |             |           |
+|                     |                |                |                | CVE-2021-29608 |             |           |
+|                     |                |                |                | CVE-2021-29607 |             |           |
+|                     |                |                |                | CVE-2021-29584 |             |           |
+|                     |                |                |                | CVE-2021-29583 |             |           |
+|                     |                |                |                | CVE-2021-29582 |             |           |
+|                     |                |                |                | CVE-2021-29581 |             |           |
+|                     |                |                |                | CVE-2021-29580 |             |           |
+|                     |                |                |                | CVE-2021-29579 |             |           |
+|                     |                |                |                | CVE-2021-29578 |             |           |
+|                     |                |                |                | CVE-2021-29577 |             |           |
+|                     |                |                |                | CVE-2021-29576 |             |           |
+|                     |                |                |                | CVE-2021-29575 |             |           |
+|                     |                |                |                | CVE-2021-29574 |             |           |
+|                     |                |                |                | CVE-2021-29573 |             |           |
+|                     |                |                |                | CVE-2021-29572 |             |           |
+|                     |                |                |                | CVE-2021-29571 |             |           |
+|                     |                |                |                | CVE-2021-29570 |             |           |
+|                     |                |                |                | CVE-2021-29569 |             |           |
+|                     |                |                |                | CVE-2021-29568 |             |           |
+|                     |                |                |                | CVE-2021-29567 |             |           |
+|                     |                |                |                | CVE-2021-29566 |             |           |
+|                     |                |                |                | CVE-2021-29565 |             |           |
+|                     |                |                |                | CVE-2021-29564 |             |           |
+|                     |                |                |                | CVE-2021-29563 |             |           |
+|                     |                |                |                | CVE-2021-29562 |             |           |
+|                     |                |                |                | CVE-2021-29560 |             |           |
+|                     |                |                |                | CVE-2021-29559 |             |           |
+|                     |                |                |                | CVE-2021-29558 |             |           |
+|                     |                |                |                | CVE-2021-29557 |             |           |
+|                     |                |                |                | CVE-2021-29556 |             |           |
+|                     |                |                |                | CVE-2021-29555 |             |           |
+|                     |                |                |                | CVE-2021-29554 |             |           |
+|                     |                |                |                | CVE-2021-29553 |             |           |
+|                     |                |                |                | CVE-2021-29552 |             |           |
+|                     |                |                |                | CVE-2021-29551 |             |           |
+|                     |                |                |                | CVE-2021-29550 |             |           |
+|                     |                |                |                | CVE-2021-29549 |             |           |
+|                     |                |                |                | CVE-2021-29548 |             |           |
+|                     |                |                |                | CVE-2021-29547 |             |           |
+|                     |                |                |                | CVE-2021-29546 |             |           |
+|                     |                |                |                | CVE-2021-29545 |             |           |
+|                     |                |                |                | CVE-2021-29544 |             |           |
+|                     |                |                |                | CVE-2021-29543 |             |           |
+|                     |                |                |                | CVE-2021-29542 |             |           |
+|                     |                |                |                | CVE-2021-29541 |             |           |
+|                     |                |                |                | CVE-2021-29540 |             |           |
+|                     |                |                |                | CVE-2021-29539 |             |           |
+|                     |                |                |                | CVE-2021-29538 |             |           |
+|                     |                |                |                | CVE-2021-29537 |             |           |
+|                     |                |                |                | CVE-2021-29536 |             |           |
+|                     |                |                |                | CVE-2021-29535 |             |           |
+|                     |                |                |                | CVE-2021-29534 |             |           |
+|                     |                |                |                | CVE-2021-29533 |             |           |
+|                     |                |                |                | CVE-2021-29532 |             |           |
+|                     |                |                |                | CVE-2021-29531 |             |           |
+|                     |                |                |                | CVE-2021-29530 |             |           |
+|                     |                |                |                | CVE-2021-29529 |             |           |
+|                     |                |                |                | CVE-2021-29528 |             |           |
+|                     |                |                |                | CVE-2021-29527 |             |           |
+|                     |                |                |                | CVE-2021-29526 |             |           |
+|                     |                |                |                | CVE-2021-29525 |             |           |
+|                     |                |                |                | CVE-2021-29524 |             |           |
+|                     |                |                |                | CVE-2021-29523 |             |           |
+|                     |                |                |                | CVE-2021-29522 |             |           |
+|                     |                |                |                | CVE-2021-29521 |             |           |
+|                     |                |                |                | CVE-2021-29520 |             |           |
+|                     |                |                |                | CVE-2021-29519 |             |           |
+|                     |                |                |                | CVE-2021-29518 |             |           |
+|                     |                |                |                | CVE-2021-29517 |             |           |
+|                     |                |                |                | CVE-2021-29516 |             |           |
+|                     |                |                |                | CVE-2021-29515 |             |           |
+|                     |                |                |                | CVE-2021-29513 |             |           |
+|                     |                |                |                | CVE-2021-29512 |             |           |
+|                     |                |                |                | CVE-2020-26269 |             |           |
+|                     |                |                |                | CVE-2020-26268 |             |           |
+| **Storing**         | N/A            | N/A            | N/A            | CVE-2021-41200 | N/A         | N/A       |
+|                     |                |                |                | CVE-2021-37650 |             |           |
+| **Visualizing**     | N/A            | N/A            | CVE-2022-24303 | N/A            | N/A         | N/A       |
 # Analyzed Applications
 
 We searched popular applications under topic OpenCV, PyTorch, Caffe and TensorFlow. The popularity is measured by the number of stars.
