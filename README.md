@@ -12,7 +12,7 @@ We evluated the CVEs of popular data processing frameworks including and found t
 
 Details about the information in each phase are in [`Application List`](Application).
 
-`CVE cases` contains the POC image used by us to trigger the vulnerabilities of the underlying frameworks.
+[`CVE cases`](CVE cases) contains the POC image used by us to trigger the vulnerabilities of the underlying frameworks.
 
 ## List of TensorFlow APIs
 In section XXX, we mentioned that we could not put the whole list of categorized TensorFlow APIs due to the page limit.
