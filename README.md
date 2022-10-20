@@ -8,7 +8,8 @@ This folder contains the list of most popular applications in the corresponding 
 Details are shown in [`Application List`](Application).
 
 ## **Syscalls Per API**
-We show detailed syscalls for example APIs for Opencv in [`Syscalls Per API`](Syscalls%20Per%20API). 
+In section 4.4.1 (Restricting System Calls), we mention that each API does not need access to all System calls.
+We show detailed syscalls for example APIs of Opencv in [`Syscalls Per API`](Syscalls%20Per%20API). 
 
 ## **Impact of Vulnerability**
 We evluated the CVEs of popular data processing frameworks including and found that TensorFlow (172 CVEs), Pillow (44 CVEs), OpenCV (22 CVEs), and NumPy (3 CVEs) had a total of 241 CVEs.
@@ -18,7 +19,6 @@ Details about the information in each phase are in [`Application List`](Applicat
 [`CVE cases`](CVE%20cases) contains the POC image used by us to trigger the vulnerabilities of the underlying frameworks.
 
 ## List of TensorFlow APIs
-In section XXX, we mentioned that we could not put the whole list of categorized TensorFlow APIs due to the page limit.
 
 [`TF API`](TF%20API) contains the full list of TensorFlow API categorization.
 
